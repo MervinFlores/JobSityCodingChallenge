@@ -1,0 +1,14 @@
+${PODS_ROOT}/Target Support Files/Pods-TVMazeApp/Pods-TVMazeApp-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
+${BUILT_PRODUCTS_DIR}/Argo/Argo.framework
+${BUILT_PRODUCTS_DIR}/Curry/Curry.framework
+${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework
+${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework
+${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
+${BUILT_PRODUCTS_DIR}/Runes/Runes.framework
+${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework
+${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

@@ -1,0 +1,48 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'TVMazeApp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for TVMazeApp
+
+# For SideMenu
+pod 'SideMenu'
+
+# Networking
+pod 'Alamofire'
+pod 'AlamofireImage'
+
+#pod 'Toaster', '~> 2.0'
+#pod 'PureLayout'
+
+# Internal Notifications https://github.com/huri000/SwiftEntryKit
+pod 'SwiftEntryKit'
+
+# DataBase
+  pod 'RealmSwift'
+
+# Custom Activity Indicator
+  pod 'PKHUD'
+  pod 'MBProgressHUD'
+
+ # JSON handling
+  pod 'SwiftyJSON'
+  pod 'Argo'
+  pod 'Curry'
+
+
+
+
+  target 'TVMazeAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'TVMazeAppUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
