@@ -25,21 +25,17 @@ class SideMenuTableViewController: UITableViewController {
     
     //segues
     let goToAllShows = "goToAllShows"
+    let goToActors = "goToActors"
     
-    var optionNames = ["All Shows"]
+    var optionNames = ["Shows", "Actors", "My Shows", "My Actors"]
     
-    var optionImages: [UIImage] = [#imageLiteral(resourceName: "ic_allShows")]
+    var optionImages: [UIImage] = [#imageLiteral(resourceName: "ic_allShows"), #imageLiteral(resourceName: "ic_allActors"), #imageLiteral(resourceName: "ic_myShows"), #imageLiteral(resourceName: "ic_myActors")]
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-//        if SQSessionManager.shareManager.getCurrentToken() != nil{
-//            self.isLogged = true
-//        } else {
-//            self.isLogged = false
-//        }
         
         self.configNavBar()
         
@@ -83,6 +79,8 @@ class SideMenuTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 self.performSegue(withIdentifier: self.goToAllShows, sender: nil)
+            case 1:
+                self.performSegue(withIdentifier: self.goToActors, sender: nil)
 //            case 6:
 //                self.logout()
             default:

@@ -1,5 +1,5 @@
 //
-//  AllShowsViewController.swift
+//  AllActorsViewController.swift
 //  TVMazeApp
 //
 //  Created by Mervin Flores on 7/14/19.
@@ -9,8 +9,8 @@
 import UIKit
 import AlamofireImage
 
-class AllShowsViewController: BaseViewController, SearchBarDelegate{
-
+class AllActorsViewController: BaseViewController, SearchBarDelegate{
+    
     @IBOutlet weak var collectionViewMostPopular: UICollectionView!
     @IBOutlet weak var collectionViewRecentlyAdded: UICollectionView!
     @IBOutlet weak var collectionViewClassicals: UICollectionView!
@@ -47,9 +47,9 @@ class AllShowsViewController: BaseViewController, SearchBarDelegate{
     }
     
     private func setupUI(){
-        self.regularNavBar(title: "All Shows", isSearchAvailable: true)
+        self.regularNavBar(title: "All Actors", isSearchAvailable: true)
         self.searchBarDelegate = self
-//        self.nameLabels()
+        //        self.nameLabels()
         
     }
     
@@ -62,10 +62,10 @@ class AllShowsViewController: BaseViewController, SearchBarDelegate{
             self.searchView.alpha = 1
         }
     }
-
+    
 }
 
-extension AllShowsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension AllActorsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
@@ -99,13 +99,4 @@ extension AllShowsViewController: UICollectionViewDelegate, UICollectionViewData
         
         return cell
     }
-}
-
-class GeneralCustomCollectionViewCell: UICollectionViewCell{
-    @IBOutlet weak var imageViewItem: UIImageView!
-    
-    func fillCell(_ name: String, _ imageURL: String){
-        self.imageViewItem.af_setImage(withURL: URL.init(string: imageURL)!)
-    }
-    
 }

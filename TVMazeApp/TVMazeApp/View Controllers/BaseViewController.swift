@@ -161,6 +161,9 @@ class BaseViewController: UIViewController {
     func hideSearchBar() {
         self.setupNewCustomSearchButton(false)
         navigationItem.titleView = nil
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.text = ""
+        self.searchBarDelegate.textToSearch("")
 //        logoImageView.alpha = 0
 //        UIView.animate(withDuration: 0.3, animations: {
 //            self.navigationItem.titleView = self.logoImageView
