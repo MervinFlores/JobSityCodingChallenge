@@ -12,16 +12,15 @@ import Curry
 import Runes
 
 struct Actor{
-        var id: Int?
-        var url: String?
-        var name: String?
-        var country: Country?
-        var birthday: String?
-        var deathday: String?
-        var gender: String?
-        var image: UrlImagesInfo?
-        var links: GenericalLinks?
-
+    var id: Int?
+    var url: String?
+    var name: String?
+    var country: Country?
+    var birthday: String?
+    var deathday: String?
+    var gender: String?
+    var image: UrlImagesInfo?
+    var links: GenericalLinks?
 }
 
 struct Country{
@@ -37,12 +36,12 @@ struct UrlImagesInfo{
 
 struct GenericalLinks {
     var link: String?
-
-//    {
-//        "self": {
-//            "href": "http://api.tvmaze.com/people/70077"
-//        }
-//    }
+    
+    //    {
+    //        "self": {
+    //            "href": "http://api.tvmaze.com/people/70077"
+    //        }
+    //    }
     
 }
 
@@ -71,7 +70,24 @@ extension Country: Argo.Decodable {
             <*> json <|? "timezone"
     }
 }
-1
+
+extension UrlImagesInfo: Argo.Decodable {
+    static func decode(_ json: JSON) -> Decoded<UrlImagesInfo> {
+        let urlImagesInfo = curry(UrlImagesInfo.init)
+        return urlImagesInfo
+            <^> json <|? "medium"
+            <*> json <|? "original"
+    }
+}
+
+extension UrlImagesInfo: Argo.Decodable {
+    static func decode(_ json: JSON) -> Decoded<UrlImagesInfo> {
+        let urlImagesInfo = curry(UrlImagesInfo.init)
+        return urlImagesInfo
+            <^> json <|? "self"
+    }
+}
+
 //{
 //    "id": 70077,
 //    "url": "http://www.tvmaze.com/people/70077/leonardo-dicaprio",
