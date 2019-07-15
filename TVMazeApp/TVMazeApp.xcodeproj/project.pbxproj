@@ -10,6 +10,7 @@
 		4D35CE9581993440D56E87E9 /* Pods_TVMazeAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981B819AD4DD9BFE487BAFD3 /* Pods_TVMazeAppUITests.framework */; };
 		6BC3B5B53E1E11753606FFBC /* Pods_TVMazeAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60723B9FA5F3493C53C03E /* Pods_TVMazeAppTests.framework */; };
 		CF9496DBAF389FCD89A7FBE4 /* Pods_TVMazeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F0CF6AD6917A2C665E4DD9 /* Pods_TVMazeApp.framework */; };
+		F4281D2322DC24C20031226E /* GeneralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4281D2222DC24C20031226E /* GeneralManager.swift */; };
 		F4593CAC22DB0C34002E7662 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4593CAB22DB0C34002E7662 /* SideMenuTableViewController.swift */; };
 		F4593CAE22DB13A6002E7662 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4593CAD22DB13A6002E7662 /* BaseViewController.swift */; };
 		F4593CB322DB1977002E7662 /* AllShowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4593CB222DB1977002E7662 /* AllShowsViewController.swift */; };
@@ -60,6 +61,7 @@
 		981B819AD4DD9BFE487BAFD3 /* Pods_TVMazeAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVMazeAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD6AABFFB7DAE3DF194FD3FD /* Pods-TVMazeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVMazeApp.release.xcconfig"; path = "Target Support Files/Pods-TVMazeApp/Pods-TVMazeApp.release.xcconfig"; sourceTree = "<group>"; };
 		D33B829C17E17DF43F760605 /* Pods-TVMazeAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVMazeAppTests.release.xcconfig"; path = "Target Support Files/Pods-TVMazeAppTests/Pods-TVMazeAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		F4281D2222DC24C20031226E /* GeneralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralManager.swift; sourceTree = "<group>"; };
 		F4593CAB22DB0C34002E7662 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		F4593CAD22DB13A6002E7662 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F4593CB222DB1977002E7662 /* AllShowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllShowsViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		F46D5CE222DB80B20086A6B7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F4281D2222DC24C20031226E /* GeneralManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				F46D5CE522DB80D90086A6B7 /* APICallError.swift in Sources */,
 				F493677122DA7BC100D0EED4 /* AppSettings.swift in Sources */,
 				F493676D22DA7A6800D0EED4 /* Colors.swift in Sources */,
+				F4281D2322DC24C20031226E /* GeneralManager.swift in Sources */,
 				F46D5CF222DB83490086A6B7 /* GeneralRouter.swift in Sources */,
 				F493676F22DA7B1600D0EED4 /* String.swift in Sources */,
 				F46D5CE722DB80E80086A6B7 /* APIClient.swift in Sources */,

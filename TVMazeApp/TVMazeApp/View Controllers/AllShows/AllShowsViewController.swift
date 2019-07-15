@@ -104,8 +104,20 @@ extension AllShowsViewController: UICollectionViewDelegate, UICollectionViewData
 class GeneralCustomCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var imageViewItem: UIImageView!
     
+    var currentCellActor: ActorSearchBean?
+    
     func fillCell(_ name: String, _ imageURL: String){
         self.imageViewItem.af_setImage(withURL: URL.init(string: imageURL)!)
+    }
+    
+    func fillActorCellInfo(_ actor: ActorSearchBean){
+        self.currentCellActor = actor
+        if let imageActor = actor.actor?.image{
+            self.imageViewItem.af_setImage(withURL: URL(string: imageActor.medium!)!)
+        } else {
+            self.imageViewItem.image = #imageLiteral(resourceName: "AppIconImage")
+        }
+        
     }
     
 }

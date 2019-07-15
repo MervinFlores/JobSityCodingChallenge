@@ -37,6 +37,7 @@ class APIClient {
         onSuccess: DataRequest.DecodableCallback<T>? = nil,
         onError:   APICallErrorCallback?             = nil) where T == T.DecodedType {
         print("REQUEST", req.request?.url as Any)
+        
         req.validate().responseAPISerializer(queue: responseProcessingQueue) {
             (res: Alamofire.DataResponse<T?>) in
             switch res.result {

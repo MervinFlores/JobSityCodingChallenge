@@ -11,6 +11,38 @@ import Argo
 import Curry
 import Runes
 
+//struct ActorSearchArray {
+//    var array: [ActorSearchBean]
+//}
+
+struct ActorSearchArray: Argo.Decodable {
+    let array: [ActorSearchBean]?
+    
+    static func decode(_ json: JSON) -> Decoded<ActorSearchArray> {
+        
+        return ActorSearchArray.init <^> Array<ActorSearchBean>.decode(json)//array.map([ActorSearchBean].decode)
+    }
+}
+
+//extension ActorSearchArray: Argo.Decodable {
+//    static func decode(_ json: JSON) -> Decoded<ActorSearchArray> {
+//        // Get dictionary
+//        let dict: Decoded<[String: JSON]> = [String: JSON].decode(json)
+//        // Map over the dictionary and decode the values
+//        let result: Decoded<[ActorSearchArray]> = dict.flatMap { object in
+//            let decoded: [Decoded<ActorSearchBean>] = Array(object.map { decode($1) })
+//            return sequence(decoded)
+//        }
+//        return ActorSearchArray.init <^> result
+//    }
+//}
+
+
+struct ActorSearchBean {
+    var score: Float?
+    var actor: Actor?
+}
+
 struct Actor{
     var id: Int?
     var url: String?
@@ -20,7 +52,7 @@ struct Actor{
     var deathday: String?
     var gender: String?
     var image: UrlImagesInfo?
-    var links: GenericalLinks?
+//    var links: GenericalLinks?
 }
 
 struct Country{
@@ -34,15 +66,24 @@ struct UrlImagesInfo{
     var original: String?
 }
 
-struct GenericalLinks {
-    var link: String?
-    
-    //    {
-    //        "self": {
-    //            "href": "http://api.tvmaze.com/people/70077"
-    //        }
-    //    }
-    
+//struct GenericalLinks {
+//    var link: String?
+//
+//    //    {
+//    //        "self": {
+//    //            "href": "http://api.tvmaze.com/people/70077"
+//    //        }
+//    //    }
+//
+//}
+
+extension ActorSearchBean: Argo.Decodable {
+    static func decode(_ json: JSON) -> Decoded<ActorSearchBean> {
+        let actorSearchBean = curry(ActorSearchBean.init)
+        return actorSearchBean
+            <^> json <|? "score"
+            <*> json <|? "person"
+    }
 }
 
 extension Actor: Argo.Decodable {
@@ -57,7 +98,7 @@ extension Actor: Argo.Decodable {
             <*> json <|? "deathday"
             <*> json <|? "gender"
             <*> json <|? "image"
-            <*> json <|? "_links"
+//            <*> json <|? "_links"
     }
 }
 
@@ -80,13 +121,13 @@ extension UrlImagesInfo: Argo.Decodable {
     }
 }
 
-extension UrlImagesInfo: Argo.Decodable {
-    static func decode(_ json: JSON) -> Decoded<UrlImagesInfo> {
-        let urlImagesInfo = curry(UrlImagesInfo.init)
-        return urlImagesInfo
-            <^> json <|? "self"
-    }
-}
+//extension UrlImagesInfo: Argo.Decodable {
+//    static func decode(_ json: JSON) -> Decoded<UrlImagesInfo> {
+//        let urlImagesInfo = curry(UrlImagesInfo.init)
+//        return urlImagesInfo
+//            <^> json <|? "self"
+//    }
+//}
 
 //{
 //    "id": 70077,

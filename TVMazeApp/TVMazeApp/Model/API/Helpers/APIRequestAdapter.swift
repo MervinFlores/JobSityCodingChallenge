@@ -25,7 +25,7 @@ class APIRequestAdapter: RequestAdapter {
         if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(APIConst.baseURL) {
             
             if urlRequest.allHTTPHeaderFields?[APIConst.HttpHeaders.AUTHORIZATION] == nil {
-                let authToken = AppSettings.tokenUtils.getBearerToken() ?? ""
+//                let authToken = AppSettings.tokenUtils.getBearerToken() ?? ""
                 if Thread.isMainThread {
                     //                    authToken = SessionManager.getActiveSession()?.tokenPair?.bearer
                 } else { //TODO: find a better way to handle this (temp fix due to UploadRequests
@@ -33,8 +33,8 @@ class APIRequestAdapter: RequestAdapter {
                         //                        authToken = SessionManager.getActiveSession()?.tokenPair?.bearer
                     }
                 }
-                let accessToken = authToken  //un IF al inicio
-                urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: APIConst.HttpHeaders.AUTHORIZATION)
+//                let accessToken = authToken  //un IF al inicio
+//                urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: APIConst.HttpHeaders.AUTHORIZATION)
                 //                    urlRequest.setValue(accessToken.asHttpHeaderVal(), forHTTPHeaderField: APIConst.HttpHeaders.AUTHORIZATION)
                 
             }

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+import UIKit
 public class APIConst {
     
     static var baseURL: String {

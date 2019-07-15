@@ -30,6 +30,8 @@ class AllActorsViewController: BaseViewController, SearchBarDelegate{
     let mainCellIdentifier = "ShowsCell"
     let searchCellIdentifier = "searchCell"
     
+    var searchedActorsResults: [ActorSearchBean]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mainView.alpha = 1
@@ -53,6 +55,21 @@ class AllActorsViewController: BaseViewController, SearchBarDelegate{
         
     }
     
+    private func getActorsFromSearch(_ search: String){
+        GeneralManager.getActorsFromSearch(query: search) { (response) in
+            
+            switch response{
+            case .success(let actors):
+                self.searchedActorsResults = actors
+            case .empty:
+                self.searchedActorsResults = nil
+            case .error:
+                break
+            }
+            self.collectionViewSearchOptions.reloadData()
+        }
+    }
+    
     func textToSearch(_ searchText: String) {
         if searchText.isEmpty{
             self.mainView.alpha = 1
@@ -60,6 +77,7 @@ class AllActorsViewController: BaseViewController, SearchBarDelegate{
         } else {
             self.mainView.alpha = 0
             self.searchView.alpha = 1
+            self.getActorsFromSearch(searchText)
         }
     }
     
@@ -68,7 +86,12 @@ class AllActorsViewController: BaseViewController, SearchBarDelegate{
 extension AllActorsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        switch collectionView{
+        case self.collectionViewSearchOptions:
+            return self.searchedActorsResults?.count ?? 0
+        default:
+            return 20
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -83,19 +106,29 @@ extension AllActorsViewController: UICollectionViewDelegate, UICollectionViewDat
         return 0.0
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! GeneralCustomCollectionViewCell
+//        print("THE NAME OF ACTOR IS: ", cell.currentCellActor?.actor?.name ?? "")
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cellIdentifier = self.mainCellIdentifier
+        
         
         if collectionView == self.collectionViewSearchOptions{
             cellIdentifier = self.searchCellIdentifier
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! GeneralCustomCollectionViewCell
+        switch collectionView {
+        case self.collectionViewSearchOptions:
+            cell.fillActorCellInfo(self.searchedActorsResults![indexPath.row])
+        default:
+            cell.fillCell("Split", "https://images-na.ssl-images-amazon.com/images/I/41AK%2B6G1sNL._SY445_.jpg")
+        }
         
-        cell.fillCell("Split", "https://images-na.ssl-images-amazon.com/images/I/41AK%2B6G1sNL._SY445_.jpg")
+        
         
         return cell
     }
