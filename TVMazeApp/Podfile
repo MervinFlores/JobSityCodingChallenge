@@ -21,7 +21,7 @@ pod 'AlamofireImage'
 pod 'SwiftEntryKit'
 
 # DataBase
-  pod 'RealmSwift'
+#  pod 'RealmSwift'
 
 # Custom Activity Indicator
   pod 'PKHUD'
