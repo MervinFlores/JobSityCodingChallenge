@@ -21,7 +21,6 @@ extension UIView{
         HUD.show(.progress, onView: self)
     }
     
-    //show success for empty responses
     func showSuccessIndicator(message:String = "") {
         HUD.flash(.success, delay: 1.0)
     }

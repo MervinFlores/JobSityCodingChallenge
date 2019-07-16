@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 class AllShowsViewController: BaseViewController, SearchBarDelegate {
-
+    
     @IBOutlet weak var collectionViewMostPopular: UICollectionView!
     @IBOutlet weak var collectionViewRecentlyAdded: UICollectionView!
     @IBOutlet weak var collectionViewClassicals: UICollectionView!
@@ -83,7 +83,7 @@ class AllShowsViewController: BaseViewController, SearchBarDelegate {
             self.getShowsFromSearch(searchText)
         }
     }
-
+    
 }
 
 extension AllShowsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

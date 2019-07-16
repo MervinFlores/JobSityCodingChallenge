@@ -96,7 +96,7 @@ extension AllActorsViewController: UICollectionViewDelegate, UICollectionViewDat
         case self.collectionViewSearchOptions:
             return self.searchedActorsResults?.count ?? 0
         default:
-            return 20
+            return 10
         }
     }
     

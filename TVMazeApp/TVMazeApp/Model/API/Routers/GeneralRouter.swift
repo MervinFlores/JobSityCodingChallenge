@@ -45,30 +45,24 @@ enum GeneralRouter: URLRequestConvertible {
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
+
         
-        //Add needed headers like in the example
         switch self {
         default:
             break
         }
         
-        // If URL has params, add them here like the example
         switch self {
         case .getShow:
             let searchParams = ["embed":"episodes"]
-//            ?embed=episodes
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: searchParams)
-            print(urlRequest)
             
         case .searchForShow(let query):
             let searchParams = ["q":query]
-//            /search/shows?q=:query
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: searchParams)
-            print(urlRequest)
             
         case .searchForActors(let query):
             let searchParams = ["q": query]
-//             /search/people?q=:query
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: searchParams)
             print(urlRequest)
             

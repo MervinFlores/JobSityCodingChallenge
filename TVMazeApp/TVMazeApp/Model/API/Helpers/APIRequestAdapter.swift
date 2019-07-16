@@ -10,9 +10,6 @@ import Foundation
 import Alamofire
 import Foundation
 import Argo
-//import FacebookCore
-//import FBSDKLoginKit
-//import RealmSwift
 
 class APIRequestAdapter: RequestAdapter {
     
@@ -21,34 +18,14 @@ class APIRequestAdapter: RequestAdapter {
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
         
-        // As long as token is set, send Auth header
         if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix(APIConst.baseURL) {
-            
             if urlRequest.allHTTPHeaderFields?[APIConst.HttpHeaders.AUTHORIZATION] == nil {
-//                let authToken = AppSettings.tokenUtils.getBearerToken() ?? ""
                 if Thread.isMainThread {
-                    //                    authToken = SessionManager.getActiveSession()?.tokenPair?.bearer
-                } else { //TODO: find a better way to handle this (temp fix due to UploadRequests
+                } else {
                     DispatchQueue.main.sync() {
-                        //                        authToken = SessionManager.getActiveSession()?.tokenPair?.bearer
                     }
                 }
-//                let accessToken = authToken  //un IF al inicio
-//                urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: APIConst.HttpHeaders.AUTHORIZATION)
-                //                    urlRequest.setValue(accessToken.asHttpHeaderVal(), forHTTPHeaderField: APIConst.HttpHeaders.AUTHORIZATION)
-                
             }
-            //            var etag: ETag?
-            //            if Thread.isMainThread {
-            //                etag = APIClient.etagManager().findETag(forURL: urlString)
-            //            } else { //TODO: find a better way to handle this (temp fix due to UploadRequests
-            //                DispatchQueue.main.sync() {
-            //                    etag = APIClient.etagManager().findETag(forURL: urlString)
-            //                }
-            //            }
-            //            if let tag = etag {
-            //                urlRequest.setValue(tag.value, forHTTPHeaderField: APIConst.HttpHeaders.ETAG_REQUEST)
-            //            }
         }
         return urlRequest
     }
@@ -86,60 +63,16 @@ class APIRequestRetrier: RequestRetrier {
             response.statusCode == 401 && !request.request!.url!.path.hasPrefix("RegisterRouter.LOGIN_PATH_PREFIX"){
             let unauthorizedErr = getUnauthorizedError(request)
             
-            //            guard isTokenRenewalAllowed(unauthorizedErr) else {
-            //                guard !isBannedUser(unauthorizedErr) else {
-            //                    debugPrint("RequestRetrier called: banned user")
-            //                    try! onBannedUser()
-            //                    completion(false, 0.0)
-            //                    NotificationCenter.default.post(name: NSNotification.bannedUser, object: nil)
-            //                    return
-            //                }
-            //                debugPrint("token renewal not allowed, neither banned user")
-            //                completion(false, 0.0)
-            //                UserManager.logout(callAPILogoutService: false, callback: { (res) in
-            //                    switch res{
-            //                    case .ok, .error:
-            //                        NotificationCenter.default.post(name: NSNotification.forcedLogout, object: nil)
-            //                    }
-            //                })
-            //
-            //                return
-            //            }
+            
             debugPrint("RequestRetrier called: token renewal")
             requestsToRetry.append(RequestToRetry(taskID: request.task!.taskIdentifier, requestRetryCompletion: completion))
             
-            //            if(!isRefreshing) {
-            //                refreshTokens { [weak self] succeeded in
-            //                    guard let strongSelf = self else { return }
-            //
-            //                    strongSelf.lock.lock(); defer { strongSelf.lock.unlock() }
-            //
-            //                    strongSelf.requestsToRetry.sorted().forEach { $0.requestRetryCompletion(succeeded, 0.0) }
-            //                    strongSelf.requestsToRetry.removeAll()
-            //                }
-            //            }
+            
         } else {
             completion(false, 0.0)
         }
     }
     
-    //    func onBannedUser() throws {
-    //        let userID = SessionManager.getActiveSession()!.userID
-    //        let realm = try! Realm()
-    //        try SessionManager.endAllActiveSessions()
-    //
-    //        if AppSettings.Accounts.Authentication.isLinked(
-    //            userID: userID,
-    //            method: .facebook) && (FBSDKAccessToken.current() != nil){
-    //            FBSDKLoginManager().logOut()
-    //        }
-    //
-    //        try! realm.write {
-    //            realm.deleteAll()
-    //        }
-    //
-    //        AppSettings.ManageSettings.cleanAllUserDefaults()
-    //    }
     
     
     func getUnauthorizedError(_ request: Request) -> APICallError.Unauthorized? {
@@ -170,28 +103,5 @@ class APIRequestRetrier: RequestRetrier {
         }
         return unauthorizedErr.reason == .tokenExpired
     }
-    
-    //    private func refreshTokens(completion: @escaping RefreshCompletion) {
-    //        guard !isRefreshing else { return }
-    //        isRefreshing = true
-    //
-    //        UserManager.refreshAuthTokens(
-    //            onSuccess: { [weak self] _ in
-    //                guard let strongSelf = self else { return }
-    //                completion(true)
-    //                strongSelf.isRefreshing = false
-    //            },
-    //            onError: { [weak self] err in
-    //                guard let strongSelf = self else { return }
-    //                debugPrint("refreshTokens: failed, reason is \(err)")
-    //                completion(false)
-    //                strongSelf.isRefreshing = false
-    //                NotificationCenter.default.post(name: NSNotification.forcedLogout, object: nil)
-    //            }
-    //        )
-    //
-    //
-    //
-    //    }
 }
 

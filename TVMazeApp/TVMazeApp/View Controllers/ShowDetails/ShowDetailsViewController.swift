@@ -27,7 +27,7 @@ class ShowDetailsViewController: BaseViewController {
     let detailCellIdentifier = "detailEpisodeCell"
     
     var showDetails: ShowBean!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

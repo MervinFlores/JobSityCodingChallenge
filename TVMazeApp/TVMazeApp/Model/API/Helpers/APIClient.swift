@@ -108,9 +108,7 @@ class APIClient {
                                             let err = response.result.error!
                                             switch err{
                                             case is APICallError.Network:
-                                                DispatchQueue.main.async {
-                                                    //                                                    Events.NetworkFailover.post(err as! APICallError.Network)
-                                                }
+                                                break
                                             default:
                                                 break
                                             }

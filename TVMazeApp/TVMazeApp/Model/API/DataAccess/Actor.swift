@@ -15,8 +15,7 @@ struct ActorSearchArray: Argo.Decodable {
     let array: [ActorSearchBean]?
     
     static func decode(_ json: JSON) -> Decoded<ActorSearchArray> {
-        
-        return ActorSearchArray.init <^> Array<ActorSearchBean>.decode(json)//array.map([ActorSearchBean].decode)
+        return ActorSearchArray.init <^> Array<ActorSearchBean>.decode(json)
     }
 }
 

@@ -11,7 +11,6 @@ import SideMenu
 
 protocol SideMenuCustomDelegate {
     func logoButtonTouched()
-    func logoutTouched()
 }
 
 class SideMenuTableViewController: UITableViewController {
@@ -36,13 +35,10 @@ class SideMenuTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        
         self.configNavBar()
-        
         guard tableView.backgroundView == nil else {
             return
         }
-        
         
     }
     
@@ -52,7 +48,7 @@ class SideMenuTableViewController: UITableViewController {
     
     // Mark: - Private Functions
     
-    func configNavBar(){
+    private func configNavBar(){
         let buttonLogo = UIButton.init(type: .custom)
         buttonLogo.setImage(#imageLiteral(resourceName: "ic_burguerMenu").withRenderingMode(.alwaysTemplate), for: .normal)
         buttonLogo.frame = CGRect.init(x: 0, y: 0, width: 40, height: 30)
@@ -67,27 +63,24 @@ class SideMenuTableViewController: UITableViewController {
         
     }
     
+    @objc func logoButtonTouched(sender: UIButton!) {
+        self.delegate.logoButtonTouched()
+    }
+    
     // MARK: - UITableView Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-//        if !isLogged{
-//            self.performSegue(withIdentifier: self.showMyShipment, sender: nil)
-//
-//        } else {
-            switch indexPath.row {
-            case 0:
-                self.performSegue(withIdentifier: self.goToAllShows, sender: nil)
-            case 1:
-                self.performSegue(withIdentifier: self.goToActors, sender: nil)
-//            case 6:
-//                self.logout()
-            default:
-                break
-
-            }
-//        }
+        
+        switch indexPath.row {
+        case 0:
+            self.performSegue(withIdentifier: self.goToAllShows, sender: nil)
+        case 1:
+            self.performSegue(withIdentifier: self.goToActors, sender: nil)
+        default:
+            break
+            
+        }
     }
     
     // MARK: - UITableView DataSource
@@ -106,20 +99,6 @@ class SideMenuTableViewController: UITableViewController {
         cell.selectedBackgroundView = backgroundView
         
         return cell
-    }
-    
-    // Mark: - LogOut
-    
-    private func logout(){
-        
-    }
-    
-    
-    
-    // Mark: - Button Actions
-    
-    @objc func logoButtonTouched(sender: UIButton!) {
-        self.delegate.logoButtonTouched()
     }
 }
 

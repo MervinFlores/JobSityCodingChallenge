@@ -15,24 +15,6 @@ public class APIConst {
         return "http://api.tvmaze.com"
     }
     
-    static var stripeToken: String {
-        //BETA: "pk_test_TxsXHcWoRhuvk1hxPs4c1i2k"
-        //STAGING: "pk_test_6p6sYaUYPSCBdOCVvFmz0VMQ"
-        #if ENV_STAGING
-        return "pk_test_6p6sYaUYPSCBdOCVvFmz0VMQ"
-        #else//if ENV_PROD
-        return "pk_test_TxsXHcWoRhuvk1hxPs4c1i2k"
-        #endif
-    }
-    
-    static var vendor: String {
-        #if ENV_STAGING
-        return ""
-        #else//if ENV_PROD
-        return ""
-        #endif
-    }
-    
     struct MediaTypes {
         static let APPLICATION_JSON = "application/json"
         static let IMAGE_JPEG       = "image/jpeg"

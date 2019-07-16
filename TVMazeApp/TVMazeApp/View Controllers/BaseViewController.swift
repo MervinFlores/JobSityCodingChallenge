@@ -12,7 +12,6 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
-    //PASAR ESTO A PRIVADO EN EL METODO SI NO SE USA MAS
     var logoImageView   : UIImageView!
     var searchBar = UISearchBar()
     var searchBarButtonItem: UIBarButtonItem?
@@ -169,43 +168,11 @@ class BaseViewController: UIViewController {
         let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.text = ""
         self.searchBarDelegate.textToSearch("")
-//        logoImageView.alpha = 0
-//        UIView.animate(withDuration: 0.3, animations: {
-//            self.navigationItem.titleView = self.logoImageView
-//            self.logoImageView.alpha = 1
-//        }, completion: { finished in
-//
-//        })
     }
-    
-    
-    
-    
-    //MARK: -
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     func withBackButtonNavBar(title: String){
         
         self.navigationController?.navigationBar.topItem?.title = " "
-//        self.setCenterNavBarLogo()
         self.setRightItemTitle(title: title)
         
     }
@@ -223,22 +190,9 @@ class BaseViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = barMenuButton
     }
     
-    // MARK: - set up popOverMenu
-    
-//    func setupPopOverMenu(){
-//        let config = FTConfiguration.shared
-//        config.backgoundTintColor = UIColor.white
-//        config.menuSeparatorColor = UIColor.clear
-//        config.menuRowHeight = self.view.layer.bounds.height * 0.05
-//        config.menuWidth = self.view.layer.bounds.width * 0.25
-//        config.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-//
-//    }
-    
     // MARK: - MenuSide Methods
     
     func instantiateSideMenuController() {
-        
         
         let sideMenu = UIStoryboard.Main().instantiateViewController(withIdentifier: "SideMenu")
         let tableViewController = sideMenu.children.first as? SideMenuTableViewController
@@ -274,13 +228,6 @@ class BaseViewController: UIViewController {
 extension BaseViewController: SideMenuCustomDelegate {
     func logoButtonTouched() {
         SideMenuManager.default.menuLeftNavigationController?.dismiss(animated: true, completion: nil)
-//        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-//        var mainNavBar = mainStoryboard.instantiateViewController(withIdentifier: "loginNavBar") as! UINavigationController
-//
-//        if SQSessionManager.shareManager.getCurrentToken() != nil{
-//            mainNavBar = mainStoryboard.instantiateViewController(withIdentifier: "HomeNavBar") as! UINavigationController
-//        }
-//        self.present(mainNavBar, animated: false, completion: nil)
     }
     
     func appearView(_ view: UIView){
@@ -293,44 +240,6 @@ extension BaseViewController: SideMenuCustomDelegate {
         UIView.animate(withDuration: 0.5, animations: {
             view.alpha = 0.0
         })
-    }
-    private func showLoginAfterLogout(){
-//        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-//        let mainNavBar = mainStoryboard.instantiateViewController(withIdentifier: "loginNavBar") as! UINavigationController
-//        let loginViewController = mainStoryboard.instantiateViewController(withIdentifier: "loginForm") as! SQLogInViewController
-//        let signUpViewController = mainStoryboard.instantiateViewController(withIdentifier: "loginHome") as! SQSingUpViewController
-//        mainNavBar.viewControllers = [signUpViewController, loginViewController]
-//        self.present(mainNavBar, animated: true, completion: nil)
-    }
-    
-    func logoutTouched() {
-        
-//        if let currentToken = SQSessionManager.shareManager.getCurrentToken(){
-//            SQProgress.show(view: self.navigationController!.view)
-//            SQAPI.shared.logOut(currentToken, completion: {(success, error) in
-//                if success{
-//                    SQProgress.hide(view: self.navigationController!.view)
-//
-//
-//
-//                } else {
-//                    SQProgress.hide(view: self.navigationController!.view)
-//                    self.errorLogoutAlert(error!)
-//                }
-//                SQSessionManager.shareManager.logout()
-//                self.showLoginAfterLogout()
-//            })
-//        }
-    }
-    
-    private func errorLogoutAlert(_ error: String){
-//        self.showLoginAfterLogout()
-//        let alertController = UIAlertController(title: "alertViewMsg_Error".localized, message: error, preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "alertViewMsg_Accept".localized, style: UIAlertActionStyle.default) {
-//            UIAlertAction in
-//        }
-//        alertController.addAction(okAction)
-//        self.present(alertController, animated: true, completion: nil)
     }
 }
 
