@@ -11,10 +11,6 @@ import Argo
 import Curry
 import Runes
 
-//struct ActorSearchArray {
-//    var array: [ActorSearchBean]
-//}
-
 struct ActorSearchArray: Argo.Decodable {
     let array: [ActorSearchBean]?
     
@@ -23,20 +19,6 @@ struct ActorSearchArray: Argo.Decodable {
         return ActorSearchArray.init <^> Array<ActorSearchBean>.decode(json)//array.map([ActorSearchBean].decode)
     }
 }
-
-//extension ActorSearchArray: Argo.Decodable {
-//    static func decode(_ json: JSON) -> Decoded<ActorSearchArray> {
-//        // Get dictionary
-//        let dict: Decoded<[String: JSON]> = [String: JSON].decode(json)
-//        // Map over the dictionary and decode the values
-//        let result: Decoded<[ActorSearchArray]> = dict.flatMap { object in
-//            let decoded: [Decoded<ActorSearchBean>] = Array(object.map { decode($1) })
-//            return sequence(decoded)
-//        }
-//        return ActorSearchArray.init <^> result
-//    }
-//}
-
 
 struct ActorSearchBean {
     var score: Float?
@@ -52,7 +34,6 @@ struct Actor{
     var deathday: String?
     var gender: String?
     var image: UrlImagesInfo?
-//    var links: GenericalLinks?
 }
 
 struct Country{
@@ -65,17 +46,6 @@ struct UrlImagesInfo{
     var medium: String?
     var original: String?
 }
-
-//struct GenericalLinks {
-//    var link: String?
-//
-//    //    {
-//    //        "self": {
-//    //            "href": "http://api.tvmaze.com/people/70077"
-//    //        }
-//    //    }
-//
-//}
 
 extension ActorSearchBean: Argo.Decodable {
     static func decode(_ json: JSON) -> Decoded<ActorSearchBean> {
@@ -98,7 +68,6 @@ extension Actor: Argo.Decodable {
             <*> json <|? "deathday"
             <*> json <|? "gender"
             <*> json <|? "image"
-//            <*> json <|? "_links"
     }
 }
 
@@ -120,34 +89,3 @@ extension UrlImagesInfo: Argo.Decodable {
             <*> json <|? "original"
     }
 }
-
-//extension UrlImagesInfo: Argo.Decodable {
-//    static func decode(_ json: JSON) -> Decoded<UrlImagesInfo> {
-//        let urlImagesInfo = curry(UrlImagesInfo.init)
-//        return urlImagesInfo
-//            <^> json <|? "self"
-//    }
-//}
-
-//{
-//    "id": 70077,
-//    "url": "http://www.tvmaze.com/people/70077/leonardo-dicaprio",
-//    "name": "Leonardo DiCaprio",
-//    "country": {
-//        "name": "United States",
-//        "code": "US",
-//        "timezone": "America/New_York"
-//    },
-//    "birthday": "1974-11-11",
-//    "deathday": null,
-//    "gender": "Male",
-//    "image": {
-//        "medium": "http://static.tvmaze.com/uploads/images/medium_portrait/45/114667.jpg",
-//        "original": "http://static.tvmaze.com/uploads/images/original_untouched/45/114667.jpg"
-//    },
-//    "_links": {
-//        "self": {
-//            "href": "http://api.tvmaze.com/people/70077"
-//        }
-//    }
-//}

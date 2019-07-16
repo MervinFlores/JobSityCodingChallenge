@@ -10,34 +10,33 @@ import Foundation
 import Alamofire
 
 enum GeneralRouter: URLRequestConvertible {
-    case getTwilioToken(accountID: Int)
     case getShow(showID: Int)
+    case getActor(actorID: Int)
     case searchForShow(query: String)
     case searchForActors(query: String)
-    
     var method: HTTPMethod {
         switch self {
-        case .getTwilioToken:
-            return .get
         case .getShow:
             return .get
         case .searchForShow:
             return .get
         case .searchForActors:
             return .get
+        case .getActor(let actorID):
+            return .get
         }
     }
     
     var path: String {
         switch self {
-        case .getTwilioToken(let accountID):
-            return "/v3/accounts/\(accountID)/twilio/accessToken"
         case .getShow(let showID):
             return "/shows/\(showID)"
         case .searchForShow:
             return "/search/shows"
         case .searchForActors:
             return "/search/people"
+        case .getActor(let actorID):
+            return "/people/\(actorID)"
         }
     }
     
@@ -55,11 +54,6 @@ enum GeneralRouter: URLRequestConvertible {
         
         // If URL has params, add them here like the example
         switch self {
-        case .getTwilioToken:
-            let searchParams = ["target":"1"]
-            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: searchParams)
-            print(urlRequest as Any)
-            
         case .getShow:
             let searchParams = ["embed":"episodes"]
 //            ?embed=episodes

@@ -32,7 +32,6 @@ class BaseViewController: UIViewController {
     // MARK: - Private Funtions
     
     private func setCenterNavBarLogo(){
-
         let imageView = UIImageView(image: #imageLiteral(resourceName: "AppIconImage"))
         self.navigationItem.titleView = imageView
     }
@@ -94,11 +93,17 @@ class BaseViewController: UIViewController {
     }
     
     
+    func setupCustomBackButton(){
+        let backImage = #imageLiteral(resourceName: "ic_btn_back").withRenderingMode(.alwaysTemplate)
+        let back = UIBarButtonItem(image: backImage, style: UIBarButtonItem.Style.plain, target: self, action: #selector(backToPreviousView))
+        back.tintColor = UIColor.white
+        
+        self.navigationItem.leftBarButtonItem = back
+    }
     
-    
-    
-    
-    //MARK: - ZONA DE TRABAJO
+    @objc func backToPreviousView(){
+        self.navigationController?.popViewController(animated: true)
+    }
     
     func regularNavBar(title: String, isSearchAvailable: Bool){
         
@@ -200,7 +205,7 @@ class BaseViewController: UIViewController {
     func withBackButtonNavBar(title: String){
         
         self.navigationController?.navigationBar.topItem?.title = " "
-        self.setCenterNavBarLogo()
+//        self.setCenterNavBarLogo()
         self.setRightItemTitle(title: title)
         
     }

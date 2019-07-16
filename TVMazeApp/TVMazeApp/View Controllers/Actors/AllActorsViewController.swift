@@ -46,6 +46,12 @@ class AllActorsViewController: BaseViewController, SearchBarDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+        layout.itemSize = CGSize(width: self.collectionViewSearchOptions.frame.size.width/3, height: self.collectionViewSearchOptions.frame.size.width/2)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        self.collectionViewSearchOptions.collectionViewLayout = layout
     }
     
     private func setupUI(){
@@ -96,7 +102,7 @@ extension AllActorsViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.collectionViewSearchOptions{
-            return CGSize(width: collectionView.frame.size.width/5, height: collectionView.frame.size.height/5)
+            return CGSize(width: collectionView.frame.size.width/2, height: collectionView.frame.size.height/2)
         } else {
             return CGSize(width: collectionView.frame.size.width/4, height: collectionView.frame.size.height)
         }
@@ -107,28 +113,42 @@ extension AllActorsViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! GeneralCustomCollectionViewCell
-//        print("THE NAME OF ACTOR IS: ", cell.currentCellActor?.actor?.name ?? "")
+        let currentCell = collectionView.cellForItem(at: indexPath) as! GeneralCustomCollectionViewCell
+        if collectionView == self.collectionViewSearchOptions{
+            let actorDetailsViewController = UIStoryboard.ActorDetails().instantiateViewController(withIdentifier: "ActorsDetailsViewController") as! ActorsDetailsViewController
+            self.view.showLoading()
+            GeneralManager.getActorDetails(actorID: currentCell.currentCellActor?.actor?.id ?? 0) { (response) in
+                self.view.dissmissLoading()
+                switch response {
+                case .success(let actorBean):
+                    actorDetailsViewController.currentActor = actorBean
+                    self.navigationController?.pushViewController(actorDetailsViewController, animated: true)
+                default:
+                    break
+                }
+            }
+        } else {
+            
+        }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cellIdentifier = self.mainCellIdentifier
         
+        var cellIdentifier = self.mainCellIdentifier
         
         if collectionView == self.collectionViewSearchOptions{
             cellIdentifier = self.searchCellIdentifier
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! GeneralCustomCollectionViewCell
+        
         switch collectionView {
         case self.collectionViewSearchOptions:
-            cell.fillActorCellInfo(self.searchedActorsResults![indexPath.row])
+            cell.fillActorCellInfo(self.searchedActorsResults![indexPath.row], true)
         default:
             cell.fillCell("Split", "https://images-na.ssl-images-amazon.com/images/I/41AK%2B6G1sNL._SY445_.jpg")
         }
-        
-        
         
         return cell
     }

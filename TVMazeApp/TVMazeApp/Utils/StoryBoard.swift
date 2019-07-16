@@ -16,4 +16,13 @@ extension UIStoryboard {
         return UIStoryboard(name:"Main", bundle: Bundle.main)
     }
     
+    //ShowDetails
+    static func ShowDetails () -> UIStoryboard {
+        return UIStoryboard(name:"ShowDetails", bundle: Bundle.main)
+    }
+    
+    //ActorDetails
+    static func ActorDetails () -> UIStoryboard {
+        return UIStoryboard(name:"ActorDetails", bundle: Bundle.main)
+    }
 }
