@@ -215,7 +215,7 @@ class BaseViewController: UIViewController {
         SideMenuManager.default.menuAnimationBackgroundColor = UIColor.clear
         SideMenuManager.default.menuPresentMode = .menuSlideIn
         SideMenuManager.default.menuFadeStatusBar = false
-
+        
         
     }
     

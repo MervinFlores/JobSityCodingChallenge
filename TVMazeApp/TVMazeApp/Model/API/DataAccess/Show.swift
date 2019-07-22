@@ -108,7 +108,7 @@ struct Rating: Argo.Decodable  {
     }
 }
 
-struct Network: Argo.Decodable  {
+struct Network: Argo.Decodable {
     var id: Int?
     var name: String?
     var country: Country?

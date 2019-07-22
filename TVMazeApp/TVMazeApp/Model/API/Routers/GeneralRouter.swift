@@ -64,7 +64,6 @@ enum GeneralRouter: URLRequestConvertible {
         case .searchForActors(let query):
             let searchParams = ["q": query]
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: searchParams)
-            print(urlRequest)
             
         default:
             break

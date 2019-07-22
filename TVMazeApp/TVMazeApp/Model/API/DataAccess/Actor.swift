@@ -24,7 +24,7 @@ struct ActorSearchBean {
     var actor: Actor?
 }
 
-struct Actor{
+struct Actor {
     var id: Int?
     var url: String?
     var name: String?

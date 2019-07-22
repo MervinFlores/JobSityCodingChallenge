@@ -25,6 +25,8 @@ class SideMenuTableViewController: UITableViewController {
     //segues
     let goToAllShows = "goToAllShows"
     let goToActors = "goToActors"
+    let goToFavActors = "goToFavActors"
+    let goToFavShows = "goToFavShows"
     
     var optionNames = ["Shows", "Actors", "My Shows", "My Actors"]
     
@@ -77,6 +79,10 @@ class SideMenuTableViewController: UITableViewController {
             self.performSegue(withIdentifier: self.goToAllShows, sender: nil)
         case 1:
             self.performSegue(withIdentifier: self.goToActors, sender: nil)
+        case 2:
+            self.performSegue(withIdentifier: self.goToFavShows, sender: nil)
+        case 3:
+            self.performSegue(withIdentifier: self.goToFavActors, sender: nil)
         default:
             break
             
